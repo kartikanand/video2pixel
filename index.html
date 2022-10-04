@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Video2Pixel</title>
+
+    <link rel="stylesheet" href="https://latex.now.sh/style.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1 class="banner">Video 2 Pixel</h1>
+
+    <form>
+      <div class="form-group">
+        <label for="js-palette">Lospec Palette URL</label>
+        <input
+          id="js-palette"
+          type="text"
+          value="https://lospec.com/palette-list/moondrom"
+        />
+        <button id="js-load-palette">Load Palette</button>
+      </div>
+
+      <div class="form-group">
+        <label for="js-change-video-scale">Resolution</label>
+        <input
+          type="range"
+          id="js-change-video-scale"
+          name="video-scale"
+          min="5"
+          max="40"
+          step="5"
+          value="10"
+        />
+      </div>
+
+      <div class="form-group">
+        <button id="js-load-webcam">Start Webcam</button>
+      </div>
+    </form>
+
+    <div id="video-root"></div>
+
+    <script type="module" src="index.js"></script>
+  </body>
+</html>
