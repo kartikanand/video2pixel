@@ -111,6 +111,8 @@ function handleLoadPalette(p, ev) {
 }
 
 function handleChangeVideoScale(p, ev) {
+  ev.preventDefault();
+
   const videoScale = ev.target.value;
   const config = getConfig();
 
@@ -185,5 +187,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document
     .getElementById('js-change-video-scale')
-    .addEventListener('change', handleChangeVideoScale.bind(null, p));
+    .addEventListener('input', handleChangeVideoScale.bind(null, p));
 });
