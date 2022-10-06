@@ -2,7 +2,9 @@
 
 This application lets you view your webcam feed pixelated and colored with palettes from lospec.com. This gives your feed a retro games look.
 
-## Screenshots
+## Demo
+
+[video2pixel](https://www.kartikanand.com/video2pixel/)
 
 ## License
 MIT
