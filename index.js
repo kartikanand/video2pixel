@@ -46,6 +46,8 @@ const getConfig = (() => {
     videoScale: 10,
     paletteUrl: 'https://lospec.com/palette-list/moondrom',
     videoReady: false,
+    gapx: 0,
+    gapy: 0,
   };
 
   return () => config;
@@ -63,7 +65,10 @@ function handleVideoLoadedCallback(p, config) {
   const newVideoWidth = Math.floor(config.windowWidth / config.videoScale);
   const newVideoHeight = Math.floor(newVideoWidth / aspectRatio);
 
-  config.video.size(newVideoWidth, newVideoHeight);
+  if (newVideoWidth != videoWidth || newVideoHeight != videoHeight) {
+    config.video.size(newVideoWidth, newVideoHeight);
+  }
+
   config.video.loop();
   config.video.hide();
   config.video.volume(0);
@@ -110,13 +115,27 @@ function handleLoadPalette(p, ev) {
   loadPalette(p, config);
 }
 
-function handleChangeVideoScale(p, ev) {
+function handleChangePixelSize(p, ev) {
   ev.preventDefault();
 
   const videoScale = ev.target.value;
   const config = getConfig();
 
   config.videoScale = parseInt(videoScale, 10);
+  config.videoReady = false;
+
+  handleVideoLoadedCallback(p, config);
+}
+
+function handleChangeGap(p, ev) {
+  ev.preventDefault();
+
+  const name = ev.target.name;
+  const val = parseInt(ev.target.value, 10);
+
+  const config = getConfig();
+
+  config[name] = val;
   config.videoReady = false;
 
   handleVideoLoadedCallback(p, config);
@@ -149,6 +168,12 @@ const initSketch = (p) => {
       return;
     }
 
+    p.clear();
+    p.background(getColorFromPalette(255, config.palette.colors));
+
+    const gapx = config.gapx;
+    const gapy = config.gapy;
+
     config.video.loadPixels();
     for (let y = 0; y < config.video.height; y += 1) {
       for (let x = 0; x < config.video.width; x += 1) {
@@ -163,8 +188,8 @@ const initSketch = (p) => {
         p.fill(color);
         p.noStroke();
         p.rect(
-          x * config.videoScale,
-          y * config.videoScale,
+          x * config.videoScale + gapx * x,
+          y * config.videoScale + gapy * y,
           config.videoScale,
           config.videoScale
         );
@@ -186,6 +211,10 @@ document.addEventListener('DOMContentLoaded', () => {
     .addEventListener('click', handleLoadPalette.bind(null, p));
 
   document
-    .getElementById('js-change-video-scale')
-    .addEventListener('input', handleChangeVideoScale.bind(null, p));
+    .getElementById('js-change-pixel-size')
+    .addEventListener('input', handleChangePixelSize.bind(null, p));
+
+  [...document.querySelectorAll('.js-change-gap')].forEach((slider) => {
+    slider.addEventListener('input', handleChangeGap.bind(null, p));
+  });
 });

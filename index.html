@@ -25,16 +25,40 @@
       </div>
 
       <div class="form-group">
-        <label for="js-change-video-scale">Resolution</label>
+        <label for="js-change-pixel-size">Pixel Size</label>
         <input
           type="range"
-          id="js-change-video-scale"
-          name="video-scale"
+          id="js-change-pixel-size"
+          name="pixel-size"
           min="5"
           max="40"
           step="5"
           value="10"
         />
+        <div>
+          <label for="js-change-gapx">Pixel Horizontal Gap</label>
+          <input
+            type="range"
+            id="js-change-gapx"
+            class="js-change-gap"
+            name="gapx"
+            min="0"
+            max="10"
+            step="1"
+            value="0"
+          />
+          <label for="js-change-gapy">Pixel Vertical Gap</label>
+          <input
+            type="range"
+            id="js-change-gapy"
+            class="js-change-gap"
+            name="gapy"
+            min="0"
+            max="10"
+            step="1"
+            value="0"
+          />
+        </div>
       </div>
 
       <div class="form-group">
