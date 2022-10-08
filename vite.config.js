@@ -2,4 +2,5 @@
 export default {
   // config options
   base: './',
+  root: 'src',
 };
