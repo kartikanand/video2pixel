@@ -4,7 +4,7 @@ This application lets you view your webcam feed pixelated and colored with palet
 
 ## Demo
 
-[video2pixel](https://www.kartikanand.com/video2pixel/)
+[video2pixel](https://kartikanand.github.io/video2pixel/)
 
 ## License
 MIT
