@@ -20,7 +20,7 @@ There is no build step and no dependencies. The site is plain HTML, CSS and ES m
 
 ```sh
 python3 -m http.server -d site 8000   # then open http://localhost:8000
-node --test tests/                    # unit tests, needs Node 22+
+node --test "tests/*.test.js"                    # unit tests, needs Node 22+
 ```
 
 Pushes to `main` run the tests and deploy `site/` to GitHub Pages (see [`.github/workflows/pages.yml`](.github/workflows/pages.yml)).
