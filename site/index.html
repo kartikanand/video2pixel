@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' blob:; connect-src https://lospec.com; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="description" content="Turn your webcam into retro pixel art using any Lospec colour palette. Runs entirely in your browser." />
+    <title>Video2Pixel</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>Video<span aria-hidden="true">▪</span>2<span aria-hidden="true">▪</span>Pixel</h1>
+      <p>Your webcam, as retro pixel art. Everything runs in your browser; no video is uploaded.</p>
+    </header>
+
+    <main>
+      <section class="stage-wrap" aria-label="Preview">
+        <canvas id="stage" width="640" height="480" role="img" aria-label="Pixelated webcam preview"></canvas>
+        <div id="empty" class="empty">
+          <p>Start your camera to see the pixel view.</p>
+          <button type="button" id="start" class="primary">Start camera</button>
+        </div>
+        <video id="source" class="visually-hidden" muted playsinline></video>
+      </section>
+
+      <div class="controls">
+        <section class="card" aria-labelledby="h-camera">
+          <h2 id="h-camera">Camera</h2>
+          <div class="row">
+            <button type="button" id="stop" disabled>Stop</button>
+            <button type="button" id="snapshot" disabled>Save PNG</button>
+          </div>
+          <label class="check"><input type="checkbox" id="mirror" checked /> Mirror view</label>
+          <label class="slider">
+            <span>Pixel size <output id="size-out" for="size"></output></span>
+            <input type="range" id="size" min="4" max="40" step="2" value="10" />
+          </label>
+        </section>
+
+        <section class="card" aria-labelledby="h-palette">
+          <h2 id="h-palette">Palette</h2>
+          <p id="palette-name" class="muted"></p>
+          <ul id="swatches" class="swatches" aria-label="Current colours"></ul>
+
+          <label class="field">
+            <span>Preset</span>
+            <select id="preset"></select>
+          </label>
+
+          <form id="lospec-form" class="field">
+            <label for="lospec-input">Lospec palette</label>
+            <div class="row">
+              <input id="lospec-input" type="text" inputmode="url" autocomplete="off" spellcheck="false" placeholder="moondrom or https://lospec.com/palette-list/…" />
+              <button type="submit">Load</button>
+            </div>
+          </form>
+
+          <form id="custom-form" class="field">
+            <label for="custom-input">Custom colours</label>
+            <div class="row">
+              <input id="custom-input" type="text" autocomplete="off" spellcheck="false" placeholder="#000, #f0f, #fff" />
+              <button type="submit">Apply</button>
+            </div>
+          </form>
+
+          <label class="check"><input type="checkbox" id="sort" checked /> Sort dark to light</label>
+          <label class="check"><input type="checkbox" id="invert" /> Invert</label>
+        </section>
+
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+      </div>
+    </main>
+
+    <footer>
+      <a href="https://github.com/kartikanand/video2pixel" rel="noopener noreferrer">Source on GitHub</a>
+      · Palettes from <a href="https://lospec.com/palette-list" rel="noopener noreferrer">Lospec</a>
+    </footer>
+  </body>
+</html>
